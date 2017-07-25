@@ -17,8 +17,12 @@ package jp.wasabeef.glide.transformations.gpu;
  */
 
 import android.content.Context;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
+
+import java.security.MessageDigest;
+
 import jp.co.cyberagent.android.gpuimage.GPUImageSketchFilter;
 
 public class SketchFilterTransformation extends GPUFilterTransformation {
@@ -31,7 +35,9 @@ public class SketchFilterTransformation extends GPUFilterTransformation {
     super(context, pool, new GPUImageSketchFilter());
   }
 
-  @Override public String getId() {
-    return "SketchFilterTransformation()";
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(("SketchFilterTransformation()").getBytes(CHARSET));
   }
+
 }

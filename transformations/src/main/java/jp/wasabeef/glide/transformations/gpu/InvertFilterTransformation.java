@@ -17,8 +17,12 @@ package jp.wasabeef.glide.transformations.gpu;
  */
 
 import android.content.Context;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
+
+import java.security.MessageDigest;
+
 import jp.co.cyberagent.android.gpuimage.GPUImageColorInvertFilter;
 
 /**
@@ -34,7 +38,8 @@ public class InvertFilterTransformation extends GPUFilterTransformation {
     super(context, pool, new GPUImageColorInvertFilter());
   }
 
-  @Override public String getId() {
-    return "InvertFilterTransformation()";
+  @Override
+  public void updateDiskCacheKey(MessageDigest messageDigest) {
+    messageDigest.update(("InvertFilterTransformation()").getBytes(CHARSET));
   }
 }
